@@ -1,3 +1,15 @@
+
+# === P115Client / concurrenttools Compatibility Patch ===
+try:
+    import concurrenttools
+    if not hasattr(concurrenttools, 'threadpool_map') and hasattr(concurrenttools, 'thread_conmap'):
+        concurrenttools.threadpool_map = concurrenttools.thread_conmap
+    if not hasattr(concurrenttools, 'taskgroup_map') and hasattr(concurrenttools, 'async_conmap'):
+        concurrenttools.taskgroup_map = concurrenttools.async_conmap
+except ImportError:
+    pass
+# ========================================================
+
 from time import sleep
 from copy import deepcopy
 from dataclasses import asdict
